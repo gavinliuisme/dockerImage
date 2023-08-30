@@ -1,6 +1,7 @@
-FROM busybox-extras
-CMD ["/bin/sh"]
+FROM nginx
 
-COPY www /www
+COPY www /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
 
-ENTRYPOINT ["/bin/busybox-extras httpd -p 80 -h /www"]
+RUN chmod +x /usr/share/nginx/html/*
+CMD ["nginx", "-g", "daemon off;"]
